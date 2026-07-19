@@ -1,0 +1,32 @@
+---
+description: Expo and React Native conventions for this project
+globs: "**/*.{ts,tsx,js,jsx}"
+alwaysApply: false
+---
+
+# Expo / React Native
+
+## Packages
+
+- Install Expo-compatible packages with `npx expo install <package>` — not bare `npm install` for native modules.
+- Prefer Expo SDK modules (expo-router, expo-image, expo-file-system) over unmaintained alternatives.
+
+## Project structure
+
+- Use Expo Router file-based routing if the template includes `app/` directory.
+- Keep screens in `app/`; shared UI in `components/`; types in `types/` or colocated.
+
+## Styling
+
+- Use React Native `StyleSheet` or the project's existing pattern — don't introduce new UI libraries without asking.
+- Support safe areas (notch, home indicator) on iPhone.
+
+## Data (v1)
+
+- Prefer `@react-native-async-storage/async-storage` or `expo-sqlite` for local-only v1 data.
+- Define clear TypeScript types for all saved entities.
+
+## Don't
+
+- Don't eject from Expo managed workflow without explicit user request.
+- Don't add web-only APIs without platform checks.

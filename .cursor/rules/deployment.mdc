@@ -1,0 +1,38 @@
+---
+description: EAS build and App Store deployment — invoke when user asks to ship
+alwaysApply: false
+---
+
+# Deployment (EAS / TestFlight)
+
+## Prerequisites
+
+- User needs: Expo account, Apple Developer ($99/yr) for App Store/TestFlight.
+- Never commit Apple credentials or API keys.
+
+## Configuration
+
+- Bundle identifier must be unique (e.g. `com.username.appname`) in `app.json` or `app.config.js`.
+- Run `eas build:configure` before first cloud build.
+
+## Commands (user runs in terminal)
+
+```bash
+npm install -g eas-cli
+eas login
+eas build:configure
+eas build --platform ios
+eas submit --platform ios
+```
+
+## Secrets
+
+- Use EAS Secrets or `.env` for API keys — never hardcode in app source.
+
+## Expo Go vs production
+
+- Expo Go is dev only. TestFlight builds are standalone — verify without `expo start` running.
+
+## When build fails
+
+- Read full EAS log; common fixes: bundle ID conflict, missing icon, invalid app.json fields.

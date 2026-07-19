@@ -1,0 +1,29 @@
+---
+description: UI iteration from design references and screenshots
+alwaysApply: true
+---
+
+# UI Iteration
+
+## Design references
+
+- When user attaches screenshots or references, match colors, spacing, typography, and layout — not generic defaults.
+- If DESIGN-BRIEF.md or reference images exist, read them before styling.
+
+## Screenshot feedback
+
+- User screenshots of the running app are the source of truth for bugs.
+- Prefer specific fixes: exact px spacing, hex colors, font sizes when user provides them.
+
+## Polish
+
+- Use subtle shadows, consistent border radius, and adequate touch targets (min 44pt height for buttons).
+- Test mentally for iPhone safe areas and scroll overflow.
+
+## Animations
+
+- Keep v1 animations simple; don't add heavy animation libraries unless requested.
+
+## When unclear
+
+- Ask one clarifying question rather than guessing layout for entire screens.

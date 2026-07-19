@@ -1,0 +1,33 @@
+---
+description: Core workflow for vibe-coding mobile apps — plan first, small scope, manage context
+alwaysApply: true
+---
+
+# Project Workflow
+
+## Before writing code
+
+- If the user asks for a new feature or screen, propose a short plan first unless they say "just do it."
+- Plans must include: screens, data models, and what is explicitly OUT of scope for v1.
+- Do not scaffold the project with `create-expo-app` — the user runs that manually.
+
+## Scope
+
+- Prefer v1: local storage, no auth, no payments, 1–2 core features.
+- Warn if the request adds auth, payments, or backend before v1 works on device.
+- One feature at a time when possible.
+
+## Before big changes
+
+- Ask before deleting files, renaming routes, or refactoring more than 3 files.
+- Match the approved plan in AGENTS.md or PLAN.md if present.
+
+## Context
+
+- If conversation is long or confused, suggest starting a new chat after updating AGENTS.md.
+- Never put API keys or secrets in source files — use `.env` and `.gitignore`.
+
+## Testing
+
+- Remind user to run `npx expo start` and test on Expo Go after UI changes.
+- When fixing bugs, ask for terminal errors or screenshots if not provided.

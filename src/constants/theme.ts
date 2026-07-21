@@ -1,26 +1,41 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * Just Salads theme — clean, minimal, quirky with a leafy accent.
  */
-
-import '@/global.css';
 
 import { Platform } from 'react-native';
 
 export const Colors = {
   light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
+    text: '#1A2E1F',
+    textSecondary: '#5C6B60',
+    background: '#F7F9F4',
+    backgroundElement: '#E8EFE3',
+    backgroundSelected: '#D4E4C8',
+    primary: '#2F6B3A',
+    primaryMuted: '#4A8B55',
+    accent: '#E8A838',
+    card: '#FFFFFF',
+    border: '#D5DED0',
+    chip: '#E8EFE3',
+    chipActive: '#2F6B3A',
+    chipActiveText: '#FFFFFF',
+    danger: '#B33A3A',
   },
   dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
+    text: '#F0F5ED',
+    textSecondary: '#A8B5AB',
+    background: '#121A14',
+    backgroundElement: '#1C281F',
+    backgroundSelected: '#2A3A2E',
+    primary: '#6FBF7A',
+    primaryMuted: '#4A8B55',
+    accent: '#E8A838',
+    card: '#1C281F',
+    border: '#2E3D32',
+    chip: '#1C281F',
+    chipActive: '#6FBF7A',
+    chipActiveText: '#121A14',
+    danger: '#E07070',
   },
 } as const;
 
@@ -28,13 +43,9 @@ export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
 export const Fonts = Platform.select({
   ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
     sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
     serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
     rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
     mono: 'ui-monospace',
   },
   default: {
@@ -44,10 +55,10 @@ export const Fonts = Platform.select({
     mono: 'monospace',
   },
   web: {
-    sans: 'var(--font-display)',
-    serif: 'var(--font-serif)',
-    rounded: 'var(--font-rounded)',
-    mono: 'var(--font-mono)',
+    sans: 'system-ui',
+    serif: 'Georgia',
+    rounded: 'system-ui',
+    mono: 'monospace',
   },
 });
 
@@ -61,5 +72,11 @@ export const Spacing = {
   six: 64,
 } as const;
 
-export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
+export const Radius = {
+  sm: 8,
+  md: 12,
+  lg: 16,
+  xl: 24,
+} as const;
+
 export const MaxContentWidth = 800;

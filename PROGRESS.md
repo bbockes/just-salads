@@ -25,13 +25,13 @@ Cursor reads this file to know where you are. Say **"what's next"** in chat for 
 
 ## Module 3 — Plan
 
-- [ ] Used APP-PLAN-PROMPT in Cursor (plan only — no code)
-- [ ] Plan reviewed and revised
-- [ ] `PLAN.md` saved in project root
+- [x] Used APP-PLAN-PROMPT in Cursor (plan only — no code)
+- [x] Plan reviewed and revised
+- [x] `PLAN.md` saved in project root
 
 ## Module 4 — Build v1
 
-- [ ] BUILD-PROMPT run — implementation started
+- [x] BUILD-PROMPT run — implementation started
 - [ ] `npx expo start` — tested on phone
 - [ ] Core v1 feature works
 - [ ] Major bugs fixed (iterate with screenshots / errors)
@@ -63,6 +63,6 @@ Cursor reads this file to know where you are. Say **"what's next"** in chat for 
 ## Notes
 
 - Module 1 complete via iOS Simulator (`npx expo start --ios`) — physical iPhone blocked until App Store Expo Go supports SDK 57.
-
+- v1 built from meal-prep-salads content: 75 recipes + WebP images, cuisine/flavor/season filters, clipboard copy.
 
 

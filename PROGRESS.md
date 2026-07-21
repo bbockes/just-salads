@@ -32,13 +32,13 @@ Cursor reads this file to know where you are. Say **"what's next"** in chat for 
 ## Module 4 — Build v1
 
 - [x] BUILD-PROMPT run — implementation started
-- [ ] `npx expo start` — tested on phone
-- [ ] Core v1 feature works
-- [ ] Major bugs fixed (iterate with screenshots / errors)
+- [x] `npx expo start` — tested on phone _(iOS Simulator)_
+- [x] Core v1 feature works
+- [x] Major bugs fixed (iterate with screenshots / errors)
 
 ## Module 5 — Habits
 
-- [ ] `AGENTS.md` filled from PROJECT-CONTEXT template
+- [x] `AGENTS.md` filled from PROJECT-CONTEXT template
 - [ ] Git initialized and v1 committed (recommended)
 
 ## Module 6 — Extra features (optional)
@@ -64,5 +64,6 @@ Cursor reads this file to know where you are. Say **"what's next"** in chat for 
 
 - Module 1 complete via iOS Simulator (`npx expo start --ios`) — physical iPhone blocked until App Store Expo Go supports SDK 57.
 - v1 built from meal-prep-salads content: 75 recipes + WebP images, cuisine/flavor/season filters, clipboard copy.
+- Module 4 UI iteration complete: search + filter dropdowns, recipe readability, scale, metric/US units, dressing formatting, instruction highlights.
 
 

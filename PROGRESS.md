@@ -4,7 +4,7 @@ Cursor reads this file to know where you are. Say **"what's next"** in chat for 
 
 **App name:** Just Salads
 
-**Last updated:** 2026-07-19
+**Last updated:** 2026-07-20
 
 ---
 
@@ -19,9 +19,9 @@ Cursor reads this file to know where you are. Say **"what's next"** in chat for 
 
 ## Module 2 — Design
 
-- [ ] `DESIGN-BRIEF.md` filled out (v1 scope small: no auth, no payments, local storage)
-- [ ] Reference screenshots or sketches collected
-- [ ] Data fields defined for anything the app saves
+- [x] `DESIGN-BRIEF.md` filled out (v1 scope small: no auth, no payments, local storage)
+- [ ] Reference screenshots or sketches collected _(skipped for now — optional)_
+- [x] Data fields defined for anything the app saves
 
 ## Module 3 — Plan
 

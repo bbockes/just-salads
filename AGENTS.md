@@ -14,7 +14,9 @@ Filled after v1 (Module 5). New Cursor chats should read this file first.
 
 **Name:** Just Salads  
 **One-line description:** A local gourmet salad recipe browser — filter by cuisine/flavor/season, view recipes with photos, scale amounts, toggle metric/US, and copy ingredients or the full recipe.  
-**Current version:** 1.0.0 (v1)
+**Current version:** 1.0.0 (v1 + favorites)
+
+**Next:** Module 7 — TestFlight (say **"start TestFlight"** or **"what's next"**). Needs Expo account + Apple Developer ($99/yr).
 
 ---
 

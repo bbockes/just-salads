@@ -6,6 +6,8 @@ Cursor reads this file to know where you are. Say **"what's next"** in chat for 
 
 **Last updated:** 2026-07-20
 
+**Next session:** Module 7 — TestFlight (say **"what's next"** or **"start TestFlight"**)
+
 ---
 
 ## Module 1 — Setup (one-time per app)
@@ -44,14 +46,15 @@ Cursor reads this file to know where you are. Say **"what's next"** in chat for 
 ## Module 6 — Extra features (optional)
 
 - [x] Favorites — planned
-- [x] Favorites — built and tested
+- [x] Favorites — built and tested _(header heart toggles favorites-only; card/detail hearts save)_
 
-## Module 7 — TestFlight (optional)
+## Module 7 — TestFlight (optional) ← **YOU ARE HERE**
 
 - [ ] Expo account + `eas login`
-- [ ] Apple Developer account
+- [ ] Apple Developer account ($99/yr — required for TestFlight / App Store)
+- [ ] `eas build:configure` + unique bundle ID in `app.json`
 - [ ] `eas build --platform ios` succeeded
-- [ ] TestFlight build installed on phone
+- [ ] Build submitted + TestFlight build installed on phone
 
 ## Module 8 — App Store (optional)
 
@@ -62,10 +65,8 @@ Cursor reads this file to know where you are. Say **"what's next"** in chat for 
 
 ## Notes
 
-- Module 1 complete via iOS Simulator (`npx expo start --ios`) — physical iPhone blocked until App Store Expo Go supports SDK 57.
-- v1 built from meal-prep-salads content: 75 recipes + WebP images, cuisine/flavor/season filters, clipboard copy.
-- Module 4 UI iteration complete: search + filter dropdowns, recipe readability, scale, metric/US units, dressing formatting, instruction highlights.
-- Module 5 complete — `AGENTS.md` filled; v1 committed (`d8370ed`).
-- Module 6: Favorites — AsyncStorage IDs, heart on cards/detail, Favorites list filter.
-
-
+- Modules 1–6 complete. Ready for shipping when user has Expo + Apple Developer accounts.
+- Module 1: iOS Simulator for day-to-day; physical Expo Go may lack SDK 57 until store catches up.
+- v1: meal-prep-salads catalog (75 recipes + WebPs), filters, search, copy, scale, metric/US, dressing formatting, instruction highlights.
+- Module 6: Favorites via AsyncStorage (`@just-salads/favorites`).
+- Deployment reference: `.cursor/rules/deployment.mdc`

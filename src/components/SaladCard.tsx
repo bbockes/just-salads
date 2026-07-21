@@ -1,8 +1,10 @@
 import { Image } from 'expo-image';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { FavoriteButton } from '@/components/FavoriteButton';
 import { getSaladImage } from '@/data/saladImages';
 import { Radius, Spacing } from '@/constants/theme';
+import { useFavorites } from '@/hooks/use-favorites';
 import { useTheme } from '@/hooks/use-theme';
 import type { Salad } from '@/types/salad';
 
@@ -13,6 +15,8 @@ type Props = {
 
 export function SaladCard({ salad, onPress }: Props) {
   const theme = useTheme();
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const favorited = isFavorite(salad.id);
   const image = getSaladImage(salad.imageSlug);
   const tags = [salad.subCuisine, ...salad.flavorTags.slice(0, 1), ...salad.seasons.slice(0, 1)];
 
@@ -29,7 +33,21 @@ export function SaladCard({ salad, onPress }: Props) {
       ]}
       accessibilityRole="button"
       accessibilityLabel={salad.name}>
-      <Image source={image} style={styles.image} contentFit="cover" transition={200} />
+      <View style={styles.imageWrap}>
+        <Image source={image} style={styles.image} contentFit="cover" transition={200} />
+        <View style={styles.heart}>
+          <FavoriteButton
+            active={favorited}
+            overlay
+            onPress={() => toggleFavorite(salad.id)}
+            accessibilityLabel={
+              favorited
+                ? `Remove ${salad.name} from favorites`
+                : `Add ${salad.name} to favorites`
+            }
+          />
+        </View>
+      </View>
       <View style={styles.body}>
         <Text style={[styles.name, { color: theme.text }]} numberOfLines={2}>
           {salad.name}
@@ -54,10 +72,18 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     marginBottom: Spacing.three,
   },
+  imageWrap: {
+    position: 'relative',
+  },
   image: {
     width: '100%',
     aspectRatio: 1,
     backgroundColor: '#E8EFE3',
+  },
+  heart: {
+    position: 'absolute',
+    right: Spacing.two,
+    bottom: Spacing.two,
   },
   body: {
     padding: Spacing.two + 2,

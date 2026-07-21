@@ -13,9 +13,11 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { CopyButtons } from '@/components/CopyButtons';
+import { FavoriteButton } from '@/components/FavoriteButton';
 import { getSaladById } from '@/data/salads';
 import { getSaladImage } from '@/data/saladImages';
 import { Radius, Spacing } from '@/constants/theme';
+import { useFavorites } from '@/hooks/use-favorites';
 import { useTheme } from '@/hooks/use-theme';
 import {
   expandIngredientsForDisplay,
@@ -34,9 +36,12 @@ export default function RecipeDetailScreen() {
   const theme = useTheme();
   const insets = useSafeAreaInsets();
   const salad = getSaladById(id);
+  const { isFavorite, toggleFavorite } = useFavorites();
   const [scale, setScale] = useState(1);
   const [scaleOpen, setScaleOpen] = useState(false);
   const [unitMode, setUnitMode] = useState<UnitMode>('metric');
+
+  const favorited = salad ? isFavorite(salad.id) : false;
 
   const ingredientRows = useMemo(
     () => (salad ? expandIngredientsForDisplay(salad.ingredients, scale, unitMode) : []),
@@ -67,7 +72,20 @@ export default function RecipeDetailScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Stack.Screen options={{ title: salad.name }} />
+      <Stack.Screen
+        options={{
+          title: salad.name,
+          headerRight: () => (
+            <FavoriteButton
+              active={favorited}
+              onPress={() => toggleFavorite(salad.id)}
+              accessibilityLabel={
+                favorited ? 'Remove from favorites' : 'Add to favorites'
+              }
+            />
+          ),
+        }}
+      />
       <ScrollView
         contentContainerStyle={[
           styles.content,

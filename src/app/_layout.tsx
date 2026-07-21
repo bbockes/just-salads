@@ -2,6 +2,7 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'react-native';
 
+import { FavoritesProvider } from '@/context/favorites';
 import { Colors } from '@/constants/theme';
 
 export default function RootLayout() {
@@ -9,7 +10,7 @@ export default function RootLayout() {
   const theme = Colors[scheme === 'dark' ? 'dark' : 'light'];
 
   return (
-    <>
+    <FavoritesProvider>
       <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
       <Stack
         screenOptions={{
@@ -34,6 +35,6 @@ export default function RootLayout() {
           }}
         />
       </Stack>
-    </>
+    </FavoritesProvider>
   );
 }

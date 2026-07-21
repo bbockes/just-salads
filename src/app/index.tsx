@@ -1,12 +1,14 @@
 import { useMemo, useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { FavoriteButton } from '@/components/FavoriteButton';
 import { FilterBar } from '@/components/FilterBar';
 import { SaladCard } from '@/components/SaladCard';
 import { SALADS } from '@/data/salads';
 import { Spacing } from '@/constants/theme';
+import { useFavorites } from '@/hooks/use-favorites';
 import { useTheme } from '@/hooks/use-theme';
 import type { SaladFilters } from '@/types/salad';
 import { filterSalads } from '@/utils/filterSalads';
@@ -22,17 +24,39 @@ export default function RecipeListScreen() {
   const theme = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { favoriteIds, isFavorite } = useFavorites();
   const [filters, setFilters] = useState<SaladFilters>(EMPTY_FILTERS);
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
 
-  const filtered = useMemo(() => filterSalads(SALADS, filters), [filters]);
+  const filtered = useMemo(() => {
+    const base = filterSalads(SALADS, filters);
+    if (!favoritesOnly) return base;
+    return base.filter((salad) => isFavorite(salad.id));
+  }, [filters, favoritesOnly, isFavorite, favoriteIds]);
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      {/* Pinned above the list so search/filters stay reachable */}
+      <Stack.Screen
+        options={{
+          title: 'Just Salads',
+          headerRight: () => (
+            <FavoriteButton
+              active={favoritesOnly}
+              onPress={() => setFavoritesOnly((v) => !v)}
+              accessibilityLabel={
+                favoritesOnly ? 'Show all salads' : 'Show favorites only'
+              }
+            />
+          ),
+        }}
+      />
+
       <View style={[styles.toolbar, { borderBottomColor: theme.border }]}>
         <FilterBar filters={filters} onChange={setFilters} />
         <Text style={[styles.count, { color: theme.textSecondary }]}>
-          {filtered.length} of {SALADS.length} salads
+          {favoritesOnly
+            ? `${filtered.length} favorite${filtered.length === 1 ? '' : 's'}`
+            : `${filtered.length} of ${SALADS.length} salads`}
         </Text>
       </View>
 
@@ -48,9 +72,13 @@ export default function RecipeListScreen() {
         ]}
         ListEmptyComponent={
           <View style={styles.empty}>
-            <Text style={[styles.emptyTitle, { color: theme.text }]}>No salads match</Text>
+            <Text style={[styles.emptyTitle, { color: theme.text }]}>
+              {favoritesOnly ? 'No favorites yet' : 'No salads match'}
+            </Text>
             <Text style={[styles.emptyBody, { color: theme.textSecondary }]}>
-              Try a different search or clear a filter.
+              {favoritesOnly
+                ? 'Tap the heart on a salad card to save it here.'
+                : 'Try a different search or clear a filter.'}
             </Text>
           </View>
         }
@@ -97,7 +125,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   cardWrap: {
-    // Cap at half width so an odd last card doesn't stretch full-bleed
     width: '48%',
     flexGrow: 0,
   },

@@ -165,6 +165,7 @@ export function formatDressingClipboard(
   const out: string[] = [];
   for (const row of rows) {
     if (row.kind === 'dressingHeader') {
+      out.push(''); // blank line above dressing block
       out.push(`Dressing — ${row.title}`);
       continue;
     }

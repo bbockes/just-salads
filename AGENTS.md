@@ -35,8 +35,8 @@ Prefer **iOS Simulator** for now — App Store Expo Go may not support SDK 57 ye
 
 - Expo SDK: **57**
 - Router: **Expo Router** (stack: list → detail)
-- Local storage: **none** — recipes are a bundled static catalog (`src/data/salads.json` + WebP assets)
-- Key packages: `expo-image`, `expo-clipboard`, `expo-haptics`, `@expo/vector-icons`
+- Local storage: **AsyncStorage** for favorite recipe IDs (`@just-salads/favorites`); recipes themselves are a bundled static catalog (`src/data/salads.json` + WebP assets)
+- Key packages: `expo-image`, `expo-clipboard`, `expo-haptics`, `@expo/vector-icons`, `@react-native-async-storage/async-storage`
 
 ---
 
@@ -45,9 +45,11 @@ Prefer **iOS Simulator** for now — App Store Expo Go may not support SDK 57 ye
 | Path | Purpose |
 |------|---------|
 | `src/app/` | Screens (Expo Router) |
-| `src/app/index.tsx` | Recipe list — search, filter dropdowns, 2-col grid |
-| `src/app/recipe/[id].tsx` | Recipe detail — scale, US/Metric, copy, ingredients, instructions |
-| `src/components/` | `SaladCard`, `FilterBar`, `CopyButtons`, etc. |
+| `src/app/index.tsx` | Recipe list — search, filter dropdowns, Favorites filter, 2-col grid |
+| `src/app/recipe/[id].tsx` | Recipe detail — scale, US/Metric, favorite heart, copy, ingredients, instructions |
+| `src/components/` | `SaladCard`, `FilterBar`, `CopyButtons`, `FavoriteButton`, etc. |
+| `src/context/favorites.tsx` | FavoritesProvider + AsyncStorage persistence |
+| `src/hooks/use-favorites.ts` | Re-exports `useFavorites` |
 | `src/data/` | `salads.json`, `saladImages.ts`, `filterOptions.ts` |
 | `src/types/salad.ts` | `Salad`, filter types |
 | `src/utils/` | filter, scale, metric, dressing format, highlight helpers |
@@ -82,6 +84,12 @@ type Salad = {
 
 Content source: ported from sibling repo `meal-prep-salads` (75 recipes + WebPs). Re-export script: `meal-prep-salads/scripts/export-just-salads.mts`.
 
+Favorites (device-only):
+
+```typescript
+favoriteIds: number[]  // Salad.id — AsyncStorage key `@just-salads/favorites`
+```
+
 ---
 
 ## v1 features (shipped)
@@ -93,6 +101,10 @@ Content source: ported from sibling repo `meal-prep-salads` (75 recipes + WebPs)
 - Accent amounts + instruction ingredient highlighting
 - Copy Ingredients / Copy Recipe (`expo-clipboard`), respects scale + unit mode
 
+## Module 6+ features (shipped)
+
+- **Favorites** — heart on cards + detail header; header heart on list toggles favorites-only view; persist IDs in AsyncStorage
+
 ---
 
 ## Not in v1 (do not add without planning)
@@ -101,7 +113,7 @@ Content source: ported from sibling repo `meal-prep-salads` (75 recipes + WebPs)
 - Payments / subscriptions
 - Cloud sync / backend database
 - Camera, push notifications
-- Favorites, user-added recipes, share sheet
+- User-added recipes, share sheet, favorite collections/folders
 - Meal planner, diet filters (Vegan/Vegetarian/Paleo/Keto) from the web app
 - Shipping PNG master images from meal-prep-salads (`images/` ~473 MB)
 
